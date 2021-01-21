@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Note } from '../../models/note';
+import { MatPaginator } from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+
+import { INote } from '../../models/note';
 import { NotesService } from '../../services/notes.service';
 
 @Component({
@@ -8,21 +11,27 @@ import { NotesService } from '../../services/notes.service';
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.scss']
 })
+
 export class MainContentComponent implements OnInit {
 
-  notes: Observable<Note[]>;
+  displayedColumns: string[] = ['title','content'];
+  dataSource : MatTableDataSource<INote>;
+
+  notes:Observable<INote[]>;
   
   constructor(
     private notesService:NotesService
   ) { }
 
-  ngOnInit(): void {
-    this.notes = this.notesService.notes;
-    this.notesService.loadAll();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    this.notes.subscribe(data => {
-      console.log(data);
-    });
+  ngOnInit(): void {
+    this.notes = this.notesService.getNotes();
+
+    this.notes.subscribe(data => {      
+      this.dataSource = new MatTableDataSource<INote>(data);
+      this.dataSource.paginator= this.paginator;
+     });
   }
 
 }
