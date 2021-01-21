@@ -1,25 +1,34 @@
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef> Title </th>
-        <td mat-cell *matCellDef="let note"> {{note.title}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="content">
-        <th mat-header-cell *matHeaderCellDef> Content </th>
-        <td mat-cell *matCellDef="let note"> {{note.content}} </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>  
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <td mat-cell *matCellDef="let note"> {{note.title}} </td>
+        </ng-container>
 
-    <mat-paginator 
-        [pageSize]="10" 
-        [pageSizeOptions]="[5,10,20]" 
-        showFirstLastButtons></mat-paginator>
+        <ng-container matColumnDef="content">
+            <th mat-header-cell *matHeaderCellDef> Content </th>
+            <td mat-cell *matCellDef="let note"> {{note.content}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let note">
+                <button mat-icon-button>
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button>
+                    <mat-icon>search</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
 </div>
-  
+
 
 
 
@@ -37,16 +46,16 @@
     <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
     <mat-card-content>
         <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting. 2
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting. 2
         </p>
     </mat-card-content>
     <mat-card-actions>
         <button mat-stroked-button color="primary">
             Like
         </button>
-        <button mat-stroked-button color="primary">            
+        <button mat-stroked-button color="primary">
             Share
         </button>
     </mat-card-actions>

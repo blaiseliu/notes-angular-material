@@ -14,7 +14,7 @@ import { NotesService } from '../../services/notes.service';
 
 export class MainContentComponent implements OnInit {
 
-  displayedColumns: string[] = ['title','content'];
+  displayedColumns: string[] = ['title','content','action'];
   dataSource : MatTableDataSource<INote>;
 
   notes:Observable<INote[]>;
