@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { Note } from '../../models/note';
+import { NotesService } from '../../services/notes.service';
 
 @Component({
   selector: 'app-main-content',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainContentComponent implements OnInit {
 
-  constructor() { }
+  notes: Observable<Note[]>;
+  
+  constructor(
+    private notesService:NotesService
+  ) { }
 
   ngOnInit(): void {
+    this.notes = this.notesService.notes;
+    this.notesService.loadAll();
+
+    this.notes.subscribe(data => {
+      console.log(data);
+    });
   }
 
 }
